@@ -17,14 +17,25 @@ const App = () => {
         duration: 750,
         easing: 'easeOutExpo',
         delay: (el, i) => 50 * i,
+      })
+      .finished.then(() => {
+        anime({
+          targets: '.svg-line',
+          strokeDashoffset: [anime.setDashoffset, 0],
+          easing: 'easeInOutSine',
+          duration: 1500,
+          delay(el, i) { return i * 250; },
+          direction: 'alternate',
+          loop: true,
+        });
       });
   });
 
   return (
     <div className="container">
-      <h1 className="ml7">
+      <div className="ml7">
         <span className="text-wrapper">
-          {('Music Stats').split('').map((letter) => {
+          {('Visualize Your Music Stats').split('').map((letter) => {
             if (letter === ' ') {
               return (<span className="whiteSpace" />);
             }
@@ -35,7 +46,8 @@ const App = () => {
             );
           })}
         </span>
-      </h1>
+        <span className="line" />
+      </div>
     </div>
   );
 };

@@ -3,17 +3,22 @@ body {
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  margin-top: 5em;
+  margin: auto;
+  width: 80%;
 }
 
 .ml7 {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   font-weight: 900;
-  font-size: 3.7em;
+  font-size: 5em;
 }
+
 .ml7 .text-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  text-align: center;
   position: relative;
   display: inline-block;
   padding-top: 0.2em;
@@ -31,4 +36,16 @@ body {
 .ml7 .whiteSpace{
   display: inline-block;
   width: .3em;
+}
+
+.ml7 .svg-container{
+  height: 200%;
+  width: 200%;
+}
+
+.ml7 .line{
+  margin: auto;
+  background-color: white;
+  width: 80%;
+  height: 3px;
 }
