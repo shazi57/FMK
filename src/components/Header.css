@@ -30,10 +30,13 @@
   width: .3em;
 }
 
-.ml7 .line{
+.ml7 .searchBoxWrapper{
   margin-left: auto;
   margin-right: auto;
   margin-top : 0.5em;
-  background-color: white;
+  border-style : solid;
+  border-color : white;
   height: 0.02em;
+  text-align: center;
+  padding-bottom: 0.6em;
 }

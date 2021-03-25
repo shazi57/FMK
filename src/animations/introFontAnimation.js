@@ -12,10 +12,18 @@ const introFontAnimation = () => anime.timeline({ loop: false })
     delay: (el, i) => 50 * i,
   })
   .add({
-    targets: '.line',
+    targets: '.searchBoxWrapper',
     easing: 'easeOutExpo',
-    width: ['0%', '80%'],
-    duration: 1500,
+    width: '80%',
+    duration: 750,
+    borderWidth: [0, 1],
+  })
+  .add({
+    targets: '.searchBoxWrapper',
+    easing: 'easeOutExpo',
+    duration: 750,
+    height: '1em',
+    borderRadius: '10px',
   });
 
 export default introFontAnimation;
