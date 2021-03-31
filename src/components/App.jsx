@@ -1,53 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { hot } from 'react-hot-loader';
 import anime from 'animejs/lib/anime.es';
+import { hot } from 'react-hot-loader';
+import introFontAnimation from '../animations/introFontAnimation';
+import searchBoxFade from '../animations/searchBoxFade';
+
+import Header from './Header';
 import './App.css';
 
 const App = () => {
-  const [loading, setLoadingStatus] = useState(true);
+  const [logoLoading, setIsLogoLoading] = useState(true);
+  const [searchBoxLoading, setIsSbLoading] = useState(true);
+  // const [term, termBeingSearched] = useState('');
 
   useEffect(() => {
-    anime.timeline({ loop: false })
-      .add({
-        targets: '.ml7 .letter',
-        translateY: ['1.1em', 0],
-        translateX: ['0.55em', 0],
-        translateZ: 0,
-        rotateZ: [180, 0],
-        duration: 750,
-        easing: 'easeOutExpo',
-        delay: (el, i) => 50 * i,
-      })
-      .finished.then(() => {
-        anime({
-          targets: '.svg-line',
-          strokeDashoffset: [anime.setDashoffset, 0],
-          easing: 'easeInOutSine',
-          duration: 1500,
-          delay(el, i) { return i * 250; },
-          direction: 'alternate',
-          loop: true,
+    if (logoLoading) {
+      introFontAnimation()
+        .finished
+        .then(() => {
+          setIsLogoLoading(false);
+        })
+        .then(() => {
+          searchBoxFade();
+        })
+        .then(() => {
+          setIsSbLoading(false);
         });
-      });
-  });
+    }
+    return () => {
+      anime.remove('.ml7 .wrapper .searchBoxWrapper .inputSearch');
+    };
+  }, [logoLoading, searchBoxLoading]);
 
   return (
     <div className="container">
-      <div className="ml7">
-        <span className="text-wrapper">
-          {('Visualize Your Music Stats').split('').map((letter) => {
-            if (letter === ' ') {
-              return (<span className="whiteSpace" />);
-            }
-            return (
-              <span className="letter">
-                {letter}
-              </span>
-            );
-          })}
-        </span>
-        <span className="line" />
-      </div>
+      <Header isLoading={logoLoading} />
     </div>
   );
 };
