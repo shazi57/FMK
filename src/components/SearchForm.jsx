@@ -4,8 +4,8 @@ import './Header.css';
 
 const SearchForm = (props) => {
   return (
-    <form>
-      <input type="text" size="50px" placeholder="search your favorite music here" />
+    <form className="formSearch">
+      <input className="inputSearch" type="text" placeholder="search your favorite music here" />
     </form>
   );
 };

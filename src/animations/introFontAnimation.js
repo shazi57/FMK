@@ -23,6 +23,7 @@ const introFontAnimation = () => anime.timeline({ loop: false })
     easing: 'easeOutExpo',
     duration: 750,
     height: '1em',
+    paddingBottom: '0.6em',
     borderRadius: '10px',
   });
 

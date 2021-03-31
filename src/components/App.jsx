@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import anime from 'animejs/lib/anime.es';
 import { hot } from 'react-hot-loader';
 import introFontAnimation from '../animations/introFontAnimation';
+import searchBoxFade from '../animations/searchBoxFade';
 
 import Header from './Header';
 import './App.css';
@@ -16,6 +17,9 @@ const App = () => {
         .finished
         .then(() => {
           setIsLoading(false);
+        })
+        .then(() => {
+          searchBoxFade();
         });
     }
 
