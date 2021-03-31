@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import anime from 'animejs/lib/anime.es';
 import { hot } from 'react-hot-loader';
 import introFontAnimation from '../animations/introFontAnimation';
@@ -8,27 +8,32 @@ import Header from './Header';
 import './App.css';
 
 const App = () => {
-  const [loading, setIsLoading] = useState(true);
+  const [logoLoading, setIsLogoLoading] = useState(true);
+  const [searchBoxLoading, setIsSbLoading] = useState(true);
   // const [term, termBeingSearched] = useState('');
 
   useEffect(() => {
-    if (loading) {
+    if (logoLoading) {
       introFontAnimation()
         .finished
         .then(() => {
-          setIsLoading(false);
+          setIsLogoLoading(false);
         })
         .then(() => {
           searchBoxFade();
+        })
+        .then(() => {
+          setIsSbLoading(false);
         });
     }
-
-    return anime.remove('.ml7 .wrapper .searchBoxWrapper');
-  }, [loading]);
+    return () => {
+      anime.remove('.ml7 .wrapper .searchBoxWrapper .inputSearch');
+    };
+  }, [logoLoading, searchBoxLoading]);
 
   return (
     <div className="container">
-      <Header isLoading={loading} />
+      <Header isLoading={logoLoading} />
     </div>
   );
 };
