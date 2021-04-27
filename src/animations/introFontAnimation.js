@@ -14,7 +14,7 @@ const introFontAnimation = () => anime.timeline({ loop: false })
   .add({
     targets: '.searchBoxWrapper',
     easing: 'easeOutExpo',
-    width: '80%',
+    width: '60%',
     duration: 500,
     borderWidth: [0, 1],
   })
@@ -22,8 +22,8 @@ const introFontAnimation = () => anime.timeline({ loop: false })
     targets: '.searchBoxWrapper',
     easing: 'easeOutExpo',
     duration: 500,
-    height: '1em',
-    paddingBottom: '0.6em',
+    height: '0.6em',
+    paddingBottom: '1.15em',
     borderRadius: '10px',
   });
 

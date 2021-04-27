@@ -3,16 +3,19 @@ import anime from 'animejs/lib/anime.es';
 import { hot } from 'react-hot-loader';
 import axios from 'axios';
 import ReactLogo from '../assets/logoCand.svg';
+import dataWindowPopin from '../animations/dataWindowPopIn';
+import logoDisappearAnimation from '../animations/logoDisappearAnimation';
 import logoAnimation from '../animations/logoAnimation';
 import introFontAnimation from '../animations/introFontAnimation';
 import searchBoxFade from '../animations/searchBoxFade';
+import SongList from './SongList';
 import Header from './Header';
 import './App.css';
 
 const App = () => {
   const [logoLoading, setIsLogoLoading] = useState(true);
-  const [searchBoxLoading, setIsSbLoading] = useState(true);
   const [term, termBeingSearched] = useState('');
+  const [isFirstTimeSearching, setFTS] = useState(true);
   const [confirmedTerm, confirmTerm] = useState('');
 
   useEffect(() => {
@@ -23,6 +26,14 @@ const App = () => {
         },
       })
         .then((res) => {
+          if (isFirstTimeSearching) {
+            logoDisappearAnimation()
+              .finished
+              .then(() => {
+                setFTS(false);
+                dataWindowPopin();
+              });
+          }
           const { data } = res;
           console.log(data);
         })
@@ -33,30 +44,20 @@ const App = () => {
   }, [confirmedTerm]);
 
   useEffect(() => {
-    // devmode
-    // setIsLogoLoading(false);
-    // setIsSbLoading(false);
-    // searchBoxFade();
-
     // loading animation
     if (logoLoading) {
       introFontAnimation()
         .finished
         .then(() => {
           setIsLogoLoading(false);
-        })
-        .then(() => {
           searchBoxFade();
-        })
-        .then(() => {
           logoAnimation();
-          setIsSbLoading(false);
         });
     }
     return () => {
       anime.remove('.ml7 .wrapper .searchBoxWrapper .inputSearch .logo');
     };
-  }, [logoLoading, searchBoxLoading]);
+  }, [logoLoading]);
 
   const handleSearch = (e) => {
     termBeingSearched(e.target.value);
@@ -75,9 +76,14 @@ const App = () => {
         confirmSearch={confirmSearch}
         onTermChange={handleSearch}
       />
-      <div className="logoWrapper">
-        <ReactLogo className="logo" />
-      </div>
+
+      {isFirstTimeSearching
+        ? (
+          <div className="logoWrapper">
+            <ReactLogo className="logo" />
+          </div>
+        )
+        : <SongList />}
     </div>
   );
 };

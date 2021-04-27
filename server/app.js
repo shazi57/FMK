@@ -19,4 +19,12 @@ app.get('/search', (req, res) => {
     });
 });
 
-app.listen(process.env.PORT || 5000);
+const server = app.listen(process.env.PORT || 5000);
+
+process.on('SIGINT', () => {
+  //  cleanup when server is closed
+  server.close(() => {
+    console.log('closing server...');
+    process.exit();
+  });
+});

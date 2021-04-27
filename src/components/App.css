@@ -1,12 +1,15 @@
-html, body {
+html, body, #root {
+  margin: 0;
   height: 100%;
   overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
   background: linear-gradient(-105deg, #009acc, #363795);
 }
 
 .container {
   margin: auto;
-  width: 80%;
+  height: 100%;
+  width: 100%;
 }
 
 .logoWrapper {
@@ -19,6 +22,6 @@ html, body {
 
 .logo {
   opacity: 0;
-  width: 60%;
+  width: 48%;
   height: auto;
 }
