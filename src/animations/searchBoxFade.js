@@ -5,7 +5,7 @@ const searchBoxFade = () => anime.timeline({ loop: false })
     targets: '.inputSearch',
     opacity: 1,
     easing: 'linear',
-    duration: 1000,
+    duration: 300,
   });
 
 export default searchBoxFade;

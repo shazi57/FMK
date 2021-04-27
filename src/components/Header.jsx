@@ -3,7 +3,9 @@ import './Header.css';
 import SearchForm from './SearchForm';
 
 const Header = (props) => {
-  const { isLoading } = props;
+  const {
+    isLoading, term, onTermChange, confirmSearch,
+  } = props;
 
   return (
     <div className="ml7">
@@ -20,7 +22,14 @@ const Header = (props) => {
         })}
       </span>
       <div className="searchBoxWrapper">
-        {(isLoading ? null : <SearchForm />)}
+        {(isLoading ? null
+          : (
+            <SearchForm
+              term={term}
+              onTermChange={onTermChange}
+              confirmSearch={confirmSearch}
+            />
+          ))}
       </div>
     </div>
   );

@@ -28,6 +28,21 @@ module.exports = {
           },
         }],
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.(png|jp(e*)g|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
 
@@ -40,10 +55,6 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
   },
-
-  // plugins: [
-  //   new webpack.HotModuleReplacementPlugin(),
-  // ],
 
   devServer: {
     contentBase: DEST_DIR,
